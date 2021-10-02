@@ -11,7 +11,7 @@ public abstract class ComplexExpression {
 
     }
     public ComplexNumber execute() {
-        return new ComplexNumber();
+        return executeOneOperation();
 
 
     }
