@@ -1,8 +1,8 @@
 package com.company;
 
 public enum Operation {
-    ADITION,
-    SUBSTRACTION,
+    ADDITION,
+    SUBTRACTION,
     MULTIPLICATION,
     DIVISION,
 
