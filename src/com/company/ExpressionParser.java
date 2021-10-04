@@ -31,7 +31,7 @@ public class ExpressionParser {
             i++;
         }
         int pow10 = 1;
-        while(s.charAt(i) != '+' || s.charAt(i) != '-'){
+        while( s.charAt(i) != '+' && s.charAt(i) != '-') {
             pow10 *= 10;
             i++;
         }
@@ -41,7 +41,7 @@ public class ExpressionParser {
         else
             i = 0;
         double realPart = 0.0;
-        while(s.charAt(i) != '+' || s.charAt(i) != '-'){
+        while(s.charAt(i) != '+' && s.charAt(i) != '-'){
             realPart += (s.charAt(i) - '0') * pow10;
             i++;
             pow10 /= 10;
@@ -53,30 +53,31 @@ public class ExpressionParser {
         int j = i + 1;
         if(s.charAt(i) == '-')
             imgPartNegative = true;
+        i++; // pass the sign of imaginary part
+        pow10 = 1;
         while(s.charAt(i) != '*'){
             pow10 *= 10;
             i++;
         }
         pow10 /= 10;
-        while(s.charAt(j) != '*'){
+        while(j < s.length() &&  s.charAt(j) != '*'){  // if is not found it means that is +/-1 * i
             imgPart += (s.charAt(j) - '0') * pow10;
             pow10 /= 10;
             j++;
         }
+        if( j == s.length()) // i found the *
+            imgPart = 1;
         if( imgPartNegative)
             imgPart = 0 - imgPart;
         return new ComplexNumber(realPart, imgPart);
     }
 
     ComplexNumber[] getComplexNumbers (String[] args){
-        ComplexNumber[] complexArgs =  new ComplexNumber[args.length/2];
+        ComplexNumber[] complexArgs =  new ComplexNumber[args.length/2+1];
         int nrOfComplexArgs = 0;
         for(int i = 0 ; i < args.length; i+=2){
-          // tbd
-            nrOfComplexArgs++;
+            complexArgs[nrOfComplexArgs++] = convertStringToComplex(args[i]);
         }
-
-
         return complexArgs;
     }
 
@@ -84,7 +85,6 @@ public class ExpressionParser {
         if(args.length < 3)
             throw new Exception("Invalid number of args");
         ComplexNumber[] complexArgs = getComplexNumbers(args);
-
 
         return switch (args[1]) {
             case "+" -> expFactory.createExpresion(Operation.ADDITION, complexArgs);

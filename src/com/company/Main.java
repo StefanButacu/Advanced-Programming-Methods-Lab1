@@ -24,7 +24,14 @@ public class Main {
 */
         //   System.out.println(Arrays.toString("10+25*i".split("[\\+\\*-]")));
         Test.testAll();
+        ExpressionParser p = new ExpressionParser();
+        try{
+            System.out.println(p.getComplexExpression(args).execute());
+        }
+        catch (Exception e){
 
+            System.out.println(e.getMessage());
+        }
 
     }
 }

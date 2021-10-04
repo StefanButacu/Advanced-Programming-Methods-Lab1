@@ -9,24 +9,56 @@ public class Test {
         System.out.println("End Basic operations test");
         System.out.println("Start Complex Expression test...");
         testComplexExpression();
-        testExpressionFactory();
+        System.out.println("End Complex Expression test");
+        System.out.println("Start ExpressionParser Expression test...");
+        testExpressionParser();
+        System.out.println("End ExpressionParser Expression test");
+        testExecution();
     }
 
-    private static void testExpressionFactory() {
+    private static void testExecution() throws Exception {
+        ExpressionParser p = new ExpressionParser();
+        // substraction
+        String[] args = new String[]{"1+1*i","-", "2+2*i", "-", "-1-1*i","-", "0-3*i" };
+        ComplexNumber rez =  p.getComplexExpression(args).execute();
+        assert(rez.getRe() == 0);
+        assert(rez.getIm() == 3);
+        // adition
+        args = new String[] { "1+1*i", "+", "2+2*i", "+", "-1-1*i", "+", "0+3*i"};
+        rez =  p.getComplexExpression(args).execute();
+        assert(rez.getRe() == 2);
+        assert(rez.getIm() == 5 );
+        // multiply
+        // division
+
+
+
+
+    }
+
+    private static void testExpressionParser() {
         ExpressionParser p = new ExpressionParser();
         // test for operator
         String[] args = new String[]{"1+3i", "+","2+5i", "+","1+i"};
         assert(p.checkOperator(args));
         args = new String[]{"1+3i", "-", "1+51i", "*", "1+421i"};
         assert(!p.checkOperator(args));
-        args = new String[]{"1+3i", "ab", "1+51i", "*", "1+421i"};
+        args = new String[]{"1+3*i", "ab", "1+51i", "*", "1+421*i"};
         assert(!p.checkOperator(args));
         testStringToComplex();
+        args = new String[]{"2+3*i", "+", "5-6*i", "+", "-2+1*i"};
+        ComplexNumber[] complexArgs = p.getComplexNumbers(args);
+        assert(complexArgs[0].getRe() == 2);
+        assert(complexArgs[0].getIm() == 3);
+        assert(complexArgs[2].getRe() == -2);
+        assert(complexArgs[2].getIm() == 1);
+        // test for invalid nr of args
+
+        // test for good calculation
 
     }
 
     private static void testStringToComplex() {
-
         ExpressionParser p = new ExpressionParser();
         ComplexNumber r =  p.convertStringToComplex("124+12*i");
         assert(r.getRe() == 124);
@@ -37,6 +69,10 @@ public class Test {
         r =  p.convertStringToComplex("-1-12*i");
         assert(r.getRe() == -1);
         assert(r.getIm() == -12);
+        /////////////////////////////////////////////
+       // r = p.convertStringToComplex("-1-i");
+       // assert(r.getRe() == -1);
+       //  assert(r.getIm() == -1);
 
     }
 

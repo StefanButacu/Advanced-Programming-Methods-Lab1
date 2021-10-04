@@ -112,6 +112,10 @@ public class ComplexNumber {
      */
     @Override
     public String toString() {
-        return re + " + " + im + "*i";
+
+        if(im > 0)
+            return re + " + " + im + "*i";
+        else
+            return re +" "+ im + " *i";
     }
 }
