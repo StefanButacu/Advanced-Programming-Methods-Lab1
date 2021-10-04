@@ -14,10 +14,12 @@ public class Test {
         System.out.println("Start Addition Expression test...");
         testAdditionExpression();
         System.out.println("End Addition Expression test");
-        System.out.println("Start Substraction Expression test...");
+        System.out.println("Start Subtraction Expression test...");
         testSubtractionExpression();
-        System.out.println("End Substraction Expression test");
-
+        System.out.println("End Subtraction Expression test");
+        System.out.println("Start Multiplication Expression test...");
+        testMultiplicationExpression();
+        System.out.println("End Multiplication Expression test");
 
     }
 
@@ -34,6 +36,35 @@ public class Test {
         assert(calculator.execute().getRe() == 0);
         assert(calculator.execute().getIm() == -3);
     }
+
+    private static void testMultiplicationExpression() {
+        ComplexNumber[] arg = new ComplexNumber[] { new ComplexNumber(1,1), new ComplexNumber(2,2), new ComplexNumber(-1,-1), new ComplexNumber(0,3)};
+        ComplexExpression calculator = new MultiplicationExpression(Operation.MULTIPLICATION, arg);
+        ComplexNumber rez =  calculator.execute();
+        assert(rez.getRe() == 12);
+        assert(rez.getIm() == 12);
+        ComplexNumber[] arg2 = new ComplexNumber[] { new ComplexNumber(1,1), new ComplexNumber(2,2), new ComplexNumber(0,0)};
+        ComplexExpression calculator2 = new MultiplicationExpression(Operation.MULTIPLICATION, arg2);
+        ComplexNumber rez2 =  calculator2.execute();
+        assert(rez2.getRe() == 0);
+        assert(rez2.getIm() == 0);
+    }
+
+    private static void testDivisionExpression() {
+        ComplexNumber[] arg = new ComplexNumber[] { new ComplexNumber(1,1), new ComplexNumber(2,2), new ComplexNumber(2,-1), new ComplexNumber(0,3)};
+        ComplexExpression calculator = new DivisionExpression(Operation.DIVISION, arg);
+        ComplexNumber rez =  calculator.execute();
+        assert(rez.getRe() == 12);
+        assert(rez.getIm() == 12);
+        ComplexNumber[] arg2 = new ComplexNumber[] { new ComplexNumber(1,1), new ComplexNumber(2,2), new ComplexNumber(0,0)};
+        ComplexExpression calculator2 = new DivisionExpression(Operation.DIVISION, arg2);
+        // try catch 0 devision
+        ComplexNumber rez2 =  calculator2.execute();
+        assert(rez2.getRe() == 0);
+        assert(rez2.getIm() == 0);
+    }
+
+
 
 
     private static void testComplexNumber() throws Exception{
@@ -61,5 +92,14 @@ public class Test {
         catch (Exception e){
             assert(e.getMessage().equals("Division by 0"));
         }
+        // 1 + 0 * i =  neutral element
+        rez = rez.impartire(new ComplexNumber(1,0));
+        assert(rez.getRe() == 6);
+        assert(rez.getIm() == 2);
+
+        rez = rez.inmultire(new ComplexNumber(0,0));
+        assert(rez.getRe() == 0);
+        assert(rez.getIm() == 0);
+
     }
 }
