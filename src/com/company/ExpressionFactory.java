@@ -2,9 +2,14 @@ package com.company;
 
 public class ExpressionFactory {
 
-    private Operation op;
-    private ComplexNumber[] args;
+    private static final ExpressionFactory instance = new ExpressionFactory();
 
+    private ExpressionFactory(){} // private constructor => force the user to not instantiate this king of object anywhere outside this class
+
+    static ExpressionFactory getInstance(){
+        return instance;
+
+    }
     /**
      *
      * @param op - enum type Operation
@@ -13,11 +18,12 @@ public class ExpressionFactory {
      */
     public ComplexExpression createExpresion(Operation op, ComplexNumber[] args){
 
-        if(op == Operation.ADDITION){
-            // do the adition
-            return new AddittionExpression(op, args);
-        }
+        return switch (op) {
+            case ADDITION -> new AddittionExpression(op, args);
+            case SUBTRACTION -> new SubtractionExpression(op, args);
+            case DIVISION -> new DivisionExpression(op, args);
+            case MULTIPLICATION -> new MultiplicationExpression(op, args);
+        };
 
-        return new AddittionExpression(op, args);
     }
 }

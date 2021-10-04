@@ -12,6 +12,7 @@ public class MultiplicationExpression extends ComplexExpression{
      */
     @Override
     public ComplexNumber executeOneOperation() {
+        // what happens if the args is empty???
         ComplexNumber rez = new ComplexNumber(1,0);
         for(ComplexNumber x: args){
             rez = rez.inmultire(x);

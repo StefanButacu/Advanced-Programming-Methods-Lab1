@@ -10,13 +10,13 @@ public abstract class ComplexExpression {
         this.args = args;
 
     }
-    public ComplexNumber execute() {
+    public ComplexNumber execute() throws Exception {
         return executeOneOperation();
 
 
     }
 
-    public abstract ComplexNumber executeOneOperation();
+    public abstract ComplexNumber executeOneOperation() throws Exception;
 
 
 }
