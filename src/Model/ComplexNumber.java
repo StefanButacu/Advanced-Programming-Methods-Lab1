@@ -1,4 +1,4 @@
-package com.company;
+package Model;
 
 public class ComplexNumber {
     private double re;
@@ -25,7 +25,7 @@ public class ComplexNumber {
      * @param re double
      * @param im double
      */
-    ComplexNumber(double re, double im) {
+    public ComplexNumber(double re, double im) {
         this.re = re;
         this.im = im;
 

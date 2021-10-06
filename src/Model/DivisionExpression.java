@@ -1,8 +1,8 @@
-package com.company;
+package Model;
 
 public class DivisionExpression extends ComplexExpression{
 
-    DivisionExpression(Operation op, ComplexNumber[] args) {
+    public DivisionExpression(Operation op, ComplexNumber[] args) {
         super(op, args);
     }
 

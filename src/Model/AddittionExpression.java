@@ -1,9 +1,9 @@
-package com.company;
+package Model;
 
 public class AddittionExpression extends ComplexExpression{
 
 
-    AddittionExpression(Operation op, ComplexNumber[] arg) {
+    public AddittionExpression(Operation op, ComplexNumber[] arg) {
         super(op, arg);
     }
 

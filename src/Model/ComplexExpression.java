@@ -1,4 +1,4 @@
-package com.company;
+package Model;
 
 public abstract class ComplexExpression {
     Operation op;

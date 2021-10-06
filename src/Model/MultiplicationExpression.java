@@ -1,8 +1,8 @@
-package com.company;
+package Model;
 
 public class MultiplicationExpression extends ComplexExpression{
 
-    MultiplicationExpression(Operation op, ComplexNumber[] args) {
+    public MultiplicationExpression(Operation op, ComplexNumber[] args) {
         super(op, args);
     }
 
@@ -12,7 +12,7 @@ public class MultiplicationExpression extends ComplexExpression{
      */
     @Override
     public ComplexNumber executeOneOperation() {
-        // what happens if the args is empty???
+        // what happens if the args is empty??? => in parser
         ComplexNumber rez = new ComplexNumber(1,0);
         for(ComplexNumber x: args){
             rez = rez.inmultire(x);

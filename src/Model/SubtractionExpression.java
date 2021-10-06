@@ -1,7 +1,7 @@
-package com.company;
+package Model;
 
 public class SubtractionExpression extends ComplexExpression{
-    SubtractionExpression(Operation op, ComplexNumber[] arg) {
+    public SubtractionExpression(Operation op, ComplexNumber[] arg) {
         super(op, arg);
     }
 

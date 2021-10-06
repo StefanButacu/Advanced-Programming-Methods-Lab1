@@ -1,4 +1,4 @@
-package com.company;
+package Model;
 
 public class ExpressionFactory {
 
@@ -13,16 +13,16 @@ public class ExpressionFactory {
     /**
      *
      * @param op - enum type Operation
-     * @param args - array of ComplexNumbers
+     * @param complexNumbersList - array of ComplexNumbers
      * @return ComplexExpression type depending on the operation
      */
-    public ComplexExpression createExpresion(Operation op, ComplexNumber[] args){
+    public ComplexExpression createExpresion(Operation op, ComplexNumber[] complexNumbersList){
 
         return switch (op) {
-            case ADDITION -> new AddittionExpression(op, args);
-            case SUBTRACTION -> new SubtractionExpression(op, args);
-            case DIVISION -> new DivisionExpression(op, args);
-            case MULTIPLICATION -> new MultiplicationExpression(op, args);
+            case ADDITION -> new AddittionExpression(op, complexNumbersList);
+            case SUBTRACTION -> new SubtractionExpression(op, complexNumbersList);
+            case DIVISION -> new DivisionExpression(op, complexNumbersList);
+            case MULTIPLICATION -> new MultiplicationExpression(op, complexNumbersList);
         };
 
     }
